@@ -7,18 +7,24 @@ interface NumberInputProps {
   max?: number;
   step: number;
   onChange: (value: number) => void;
+  disabled?: boolean;
 }
 
-const NumberInput: React.FC<NumberInputProps> = ({ label, value, min, max, step, onChange }) => {
+const NumberInput: React.FC<NumberInputProps> = ({ label, value, min, max, step, onChange, disabled }) => {
   const handleIncrement = () => {
-    if (value <= max && value != max) {
-      onChange(value + step);
+    // If max is undefined, allow increment, otherwise check if we're below max
+    if (max === undefined || (value + step <= max)) {
+      if (!disabled) {
+        onChange(value + step);
+      }
     }
   };
 
   const handleDecrement = () => {
     if (value > min) {
-      onChange(value - step);
+      if (!disabled) {
+        onChange(value - step);
+      }
     }
   };
 
@@ -28,6 +34,7 @@ const NumberInput: React.FC<NumberInputProps> = ({ label, value, min, max, step,
         <button
           onClick={handleDecrement}
           className="text-white bg-gray-700 rounded-lg w-8 h-8 flex items-center justify-center"
+          disabled={disabled || value <= min}
         >
           &#9660;
         </button>
@@ -38,6 +45,7 @@ const NumberInput: React.FC<NumberInputProps> = ({ label, value, min, max, step,
         <button
           onClick={handleIncrement}
           className="text-white bg-gray-700 rounded-lg w-8 h-8 flex items-center justify-center"
+          disabled={disabled || (max !== undefined && value >= max)}
         >
           &#9650;
         </button>

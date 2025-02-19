@@ -3,10 +3,19 @@ import { FC } from 'react';
 interface SpeedSliderProps {
   speed: number;
   setSpeed: (speed: number) => void;
-  setSpeedMs: (speed: number) => void;
+  setSpeedMs: (speedMs: number) => void;
+  disabled?: boolean;
 }
 
-const SpeedSlider: FC<SpeedSliderProps> = ({ speed, setSpeed, setSpeedMs }) => {
+const SpeedSlider: FC<SpeedSliderProps> = ({ speed, setSpeed, setSpeedMs, disabled }) => {
+  const handleSpeedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (disabled) return;
+    
+    const newSpeed = parseInt(e.target.value);
+    setSpeed(newSpeed);
+    setSpeedMs((6 - (newSpeed)) * 1000);
+  };
+
   return (
     <div className='w-full'>
       {/* <div>Speed: {speed}x</div> */}
@@ -22,11 +31,9 @@ const SpeedSlider: FC<SpeedSliderProps> = ({ speed, setSpeed, setSpeedMs }) => {
           min="1" 
           max="5" 
           value={speed} 
-          onChange={(e) => {
-            setSpeed(Number(e.target.value))
-            setSpeedMs((6 - (Number(e.target.value))) * 1000)
-          }}
+          onChange={handleSpeedChange}
           className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700" 
+          disabled={disabled}
         />
         <div className='relative'>
           <span className="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-5">1x</span>

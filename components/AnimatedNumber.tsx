@@ -21,7 +21,7 @@ const AnimatedNumber: FC<AnimatedNumberProps> = ({ value, speedMs, className }) 
 
   return (
     <div className={className}>
-      {className.includes("Root_animatedNumber") ? 
+      {className?.includes("Root_animatedNumber") ? 
         <div className='flex'>
         <animated.div>
           {value === 0 ? "0.00" : number.to((n) => n.toFixed(2))}

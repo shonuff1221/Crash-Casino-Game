@@ -10,6 +10,8 @@
     "start-server": "node server.js"
   },
   "dependencies": {
+    "@kinde-oss/kinde-auth-nextjs": "^2.5.1",
+    "@prisma/client": "^6.4.0",
     "@react-spring/web": "^9.7.3",
     "classnames": "^2.5.1",
     "express": "^4.19.2",

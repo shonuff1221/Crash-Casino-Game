@@ -103,7 +103,7 @@ const Chat: FC<ChatProps> = ({ userName }) => {
                 }
               }}
             />
-            <button disabled={!userName} className="inline-flex justify-center p-2 text-white cursor-pointer py-2 px-4 rounded bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold disabled:opacity-50" onClick={handleSend}>
+            <button disabled={!userName} className="inline-flex justify-center p-2 text-white cursor-pointer py-2 px-4 rounded bg-gradient-to-r from-pink-500 to-red-500 font-bold disabled:opacity-50" onClick={handleSend}>
               <span className="">Send</span>
             </button>
           </div>
